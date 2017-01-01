@@ -1,0 +1,107 @@
+<div ng-click="hideSideBarLeft()" class="divNenDen"></div>
+<div class="sidebar-left primary-bg-nhat" id="sideBarLeft" style="padding-bottom:6px;">
+  <div class="timeline" style="height:100px;">
+    <div style="width:100%;height:100px;float:left;">
+      <img class="shadow-1" id="timeline-image" src="img/anonymous.png" style="margin-top:10px;margin-left:10px;">
+      <label class="primary-bg-color" id="lbName" style="margin-top:12px;font-size:16px;">Pham Khoi Nguyen</label>
+      <p style="min-width:100px;float:left;display:inline-block;width:60%;margin-left:9px;margin-top:4px;font-size:13px;margin-bottom:-10px;" class="primary-bg-color">
+        <i class="ion ion-android-star primary-bg-color" style="font-size:18px;"></i>
+        <i class="ion ion-android-star primary-bg-color" style="font-size:18px;"></i>
+        <i class="ion ion-android-star primary-bg-color" style="font-size:18px;"></i>
+        <i class="ion ion-android-star primary-bg-color" style="font-size:18px;"></i>
+        (72)
+      </p>
+      <div style="float:left;display:inline-block;width:100%;margin-left:16px;margin-top:6px;">
+        <label style="display:inline-block;float:left;font-size:13px;text-align:left;" class="primary-bg-color">Website programmer</label>
+      </div>
+
+    </div>
+  </div>
+  <div class="basicdiv primary-bg-nhat" style="height:2px;"></div>
+  <div class="basicdiv primary-bg" style="height:2px;"></div>
+  <div class="custom-card-title primary-color" style="margin-bottom:0px;">
+    Notifications:
+  </div>
+  <div ng-repeat="noti in notifications" class="custom-card shadow-1" style="width:93%;margin-left:3%;">
+
+    <div class="basicdiv" style="width:100%;float:left;">
+      <div class="basicdiv" style="width:20%;float:left;">
+        <img style="width:70%;border-radius:50%;margin:0px 15% 0px 15%;" src="{{noti.ava}}" />
+      </div>
+      <div class="basicdiv" style="width:80%;float:left;">
+        <label class="custom-card-content-label-content primary-color" style="width:100%;float:left;font-weight:bold;">
+          {{noti.from}}
+        </label>
+        <div class="basicdiv" style="width:100%;float:left;font-size:13px;">
+          Rating:
+          <i ng-repeat="n in rangeRating(noti.ratings)" class="ion ion-android-star primary-color" style="font-size:16px;margin-top:4px;"></i>
+        </div>
+
+
+      </div>
+      <label class="custom-card-content-label-content" style="width:90%;float:left;margin-left:5%;">
+        {{noti.content}}
+      </label>
+    </div>
+
+  </div>
+</div>
+<div class="header">
+  <div class="persona" ng-click="showSideBarLeft()">
+    <img src="img/ava.png">
+    <span class="primary-bg-color" style="line-height:50px;">Nguyen Pham</span>
+  </div>
+  <a class="ion ion-ios-world-outline header-button-right primary-bg-color" style="padding-right:22px;"></a>
+  <a class="ion ion-ios-list-outline header-button-right primary-bg-color" style="padding-left:22px;"></a>
+  <div class="basicdiv primary-bg-nhat" style="height:1px;"></div>
+  <div class="basicdiv primary-bg" style="height:2px;"></div>
+</div>
+<div id="grid" class="footer primary-bg-nhat" style="width:100%;height:100%;top:0px;left:0px;padding-top:60px;overflow:scroll;padding-bottom:2px;">
+  <div ng-repeat="data in searchedJobs | orderBy: data.distance" ng-click="showMeThisJobDetail(data)" class="basicdiv shadow-1 jobKhungFly black-bg" style="margin-left:1vw;margin-right:1vw;width:98vw;margin-bottom:4px;margin-top:0px;">
+    <div class="basicdiv" style="width:68%;height:80px;float:left;border-right:1px solid #E0E0E0;margin-top:5px;">
+      <label class="custom-card-content-label-content elipsi" style="font-size:14px;font-weight:bold;width:100%;float:left;margin-top:-2px;margin-bottom:6px;">
+        {{data.info.title }}
+      </label>
+      <div class="basicdiv" style="width:100%;float:left;margin-bottom:6px;">
+        <div class="basicdiv" style="width:20%;float:left;">
+          <img style="width:70%;border-radius:50%;margin:0px 15% 0px 15%;max-width:46px;" src="{{data.employer.ava}}" />
+        </div>
+        <div class="basicdiv" style="width:80%;float:left;margin-top:-3px;">
+          <label class="custom-card-content-label-content primary-color elipsi" style="width:100%;float:left;font-weight:bold;">
+            {{data.employer.name}}
+          </label>
+
+          <label class="custom-card-content-label-content elipsi" style="width:100%;float:left">
+            {{data.employer.title}}
+          </label>
+          <div class="basicdiv" style="width:100%;float:left;font-size:13px;">
+            Rating:
+            <i ng-repeat="n in rangeRating(data.employer.ratings)" class="ion ion-android-star primary-color" style="font-size:13px;margin-top:4px;"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="basicdiv" style="width:32%;height:80px;float:left;margin-top:18px;">
+      <div class="basicdiv" style="width:100%;float:left;">
+        <i class="ion ion-android-compass primary-color" style="font-size:14px;float:left;display:inline-block;width:20%;text-align:center;margin-top:2px;"></i>
+        <label class="custom-card-content-label-content elipsi" style="width:80%;float:left;display:inline-block;">
+          ~{{roundToOneDecimal(data.distance * 100)}}km, {{floor(data.distance * 100 / 20 * 60)}}min
+        </label>
+      </div>
+      <div class="basicdiv" style="width:100%;float:left;">
+        <i class="ion ion-android-calendar primary-color" style="font-size:14px;float:left;display:inline-block;width:20%;text-align:center;margin-top:2px;"></i>
+        <label class="custom-card-content-label-content elipsi" style="width:80%;float:left;display:inline-block;">
+          {{data.info.hours}} hours
+        </label>
+      </div>
+      <div class="basicdiv" style="width:100%;float:left;">
+        <i class="ion ion-android-favorite primary-color" style="font-size:14px;float:left;display:inline-block;width:20%;text-align:center;margin-top:2px;"></i>
+        <label class="custom-card-content-label-content elipsi" style="width:80%;float:left;display:inline-block;">
+          <span class="primary-color" style="font-weight:bold;">{{data.info.salary}}K</span> VND
+        </label>
+      </div>
+    </div>
+  </div>
+
+</div>

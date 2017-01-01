@@ -1,0 +1,179 @@
+<div class="header primary-bg" style="height:52px;position:absolute;z-index:2">
+  <div class="persona">
+    <a ng-click="BackToHomeFromJobDetail()" class="ion ion-arrow-left-c header-button-right primary-bg-color xin-dung-trigger-parent-event" style="padding-left:12px;padding-right:22px;float:left;"></a>
+    <span class="primary-bg-color xin-dung-trigger-parent-event" style="line-height:50px;">Job Informations:</span>
+  </div>
+  <i class="ion ion-android-more-vertical header-button-right primary-bg-color" style="padding-right:22px;"></i>
+  <div class="primary-bg-nhat basicdiv" style="height:1px;width:100%;float:left;"></div>
+  <div class="primary-bg basicdiv" style="height:2px;width:100%;float:left;"></div>
+</div>
+<div id="jobDetail" class="footer primary-bg-nhat" style="width:100%;right:0px;top:0px;padding:0px;overflow:scroll;z-index:1;">
+  <div class="basicdiv primary-bg" style="width:100%;float:left;margin-top:52px;">
+
+    <div class="basicdiv" style="width:100%;float:left;">
+      <label class="primary-bg-color" style="display:inline-block;width:100%;float:left;padding:6px 12px 6px 12px;font-size:20px;line-height:28px;font-weight:bold;">
+        Tim nguoi giup viec nha va trong tre nho
+      </label>
+    </div>
+    <div class="primary-bg-nhat basicdiv" style="height:1px;width:100%;float:left;"></div>
+    <div class="primary-bg basicdiv" style="height:2px;width:100%;float:left;"></div>
+  </div>
+  <div class="basicdiv" id="leaflet" style="width:100%;padding:6px;height:40vh;">
+
+  </div>
+  <div class="basicdiv primary-bg" style="width:100%;float:left;">
+    <div class="primary-bg basicdiv" style="height:2px;width:100%;float:left;"></div>
+    <div class="primary-bg-nhat basicdiv" style="height:1px;width:100%;float:left;"></div>
+    <div class="basicdiv" style="width:10%;float:left;text-align:center;">
+      <ion class="ion ion-map header-button-right primary-bg-color" style="float:left;font-size:20px;margin-top:-7px;"></ion>
+    </div>
+    <div class="basicdiv" style="width:90%;float:left;">
+      <label class="primary-bg-color" style="display:inline-block;width:100%;float:left;padding:8px 7px 8px 7px;font-size:15px;font-weight:bold;">
+        Room 341, 3rd floor, Binh Phu apartment, HCMC
+      </label>
+    </div>
+
+    <div class="primary-bg-nhat basicdiv" style="height:1px;width:100%;float:left;"></div>
+    <div class="primary-bg basicdiv" style="height:2px;width:100%;float:left;"></div>
+  </div>
+
+  <div class="basicdiv" style="width:100%;padding:6px;">
+    <div class="custom-card shadow-1" style="width:100%;height:90px;">
+      <div class="custom-card-content" style="width:100%;float:left;margin-top:2px;">
+        <div style="width:33%;float:left;display:inline-block;min-height:54px;margin-top:10px;text-align:center;">
+          <i class="ion ion-ios-location full-bg-icon primary-bg primary-bg-color" style="width:46px;height:46px;line-height:46px;font-size:1.8em;"></i>
+          <label class="custom-card-content-label-content elipsi" style="max-width:80px;width:30px;margin-top:6px;display:inline-block;">
+            ~{{roundToOneDecimal(selectedJobToView.distance * 100)}}km
+          </label><br/>
+          <label class="custom-card-content-label-content elipsi" style="margin-top:-2px;max-width:80px;width:30px;;display:inline-block;">
+            <span class="primary-color" style="font-weight:bold;font-size:14px;">{{floor(selectedJobToView.distance * 100 / 20 * 60)}}</span> min
+          </label>
+        </div>
+        <div style="width:33%;float:left;display:inline-block;min-height:54px;margin-top:10px;text-align:center;">
+          <i class="ion ion-ios-speedometer full-bg-icon primary-bg primary-bg-color" style="width:46px;height:46px;line-height:46px;font-size:1.8em;"></i>
+          <label class="custom-card-content-label-content elipsi" style="max-width:80px;width:30px;margin-top:4px;display:inline-block;">
+            <span class="primary-color" style="font-weight:bold;font-size:14px;">{{selectedJobToView.info.hours}}</span> hrs
+          </label><br/>
+          <label class="custom-card-content-label-content elipsi" style="width:30px;max-width:80px;display:inline-block;">
+            of work
+          </label>
+        </div>
+        <div style="width:33%;float:left;display:inline-block;min-height:54px;margin-top:10px;text-align:center;">
+          <i class="ion ion-card full-bg-icon primary-bg primary-bg-color" style="width:46px;height:46px;line-height:46px;font-size:1.8em;"></i>
+          <label class="custom-card-content-label-content primary-color elipsi" style="max-width:80px;width:30px;margin-top:1px;font-size:22px;font-weight:bold;display:inline-block;">
+            {{selectedJobToView.info.salary}}
+          </label><br/>
+          <label class="custom-card-content-label-content elipsi" style="margin-top:-7px;max-width:20px;display:inline-block;">
+            trieu VND
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="custom-card shadow-1" style="width:100%;">
+      <div class="custom-card-title primary-color">
+        Description:
+      </div>
+      <div class="custom-card-content">
+        <label class="custom-card-content-label-content" style="margin-top:4px;;font-size:14px;padding-left:8px;padding-right:8px;line-height:20px;width:100%;">
+          {{selectedJobToView.info.description}}
+        </label>
+      </div>
+
+    </div>
+    <div class="custom-card shadow-1" style="width:100%;">
+      <div class="custom-card-title primary-color">
+        Requirements:
+      </div>
+      <div class="custom-card-content">
+        <label ng-repeat="require in selectedJobToView.info.requirements" class="custom-card-content-label-content" style="margin-top:4px;;font-size:14px;padding-left:8px;padding-right:8px;line-height:20px;width:100%;">
+          {{$index + 1}}. {{require}}
+        </label>
+      </div>
+    </div>
+    <div class="custom-card shadow-1" style="width:100%;">
+      <div class="custom-card-title primary-color">
+        Benefits:
+      </div>
+      <div class="custom-card-content">
+        <label ng-repeat="benefit in selectedJobToView.info.benefits" class="custom-card-content-label-content" style="margin-top:4px;;font-size:14px;padding-left:8px;padding-right:8px;line-height:20px;width:100%;">
+          {{$index + 1}}. {{benefit}}
+        </label>
+      </div>
+    </div>
+    <div class="custom-card shadow-1" style="width:100%;min-height:120px;">
+      <div class="custom-card-title primary-color" style="margin-bottom:8px;">
+        About employer:
+      </div>
+      <div class="basicdiv" style="width:100%;float:left;margin-bottom:6px;">
+        <div class="basicdiv" style="width:20%;float:left;">
+          <img style="width:70%;border-radius:50%;margin:0px 15% 0px 15%;" src="{{selectedJobToView.employer.ava}}" />
+        </div>
+        <div class="basicdiv" style="width:80%;float:left;">
+          <label class="custom-card-content-label-content primary-color" style="width:100%;float:left;font-weight:bold;">
+            {{selectedJobToView.employer.name}}
+          </label>
+
+          <label class="custom-card-content-label-content" style="width:100%;float:left">
+            {{selectedJobToView.employer.title}}
+          </label>
+          <div class="basicdiv" style="width:100%;float:left;font-size:13px;">
+            Rating:
+            <i ng-repeat="n in rangeRating(selectedJobToView.employer.ratings)" class="ion ion-android-star primary-color" style="font-size:16px;margin-top:4px;"></i>
+          </div>
+        </div>
+        <label class="custom-card-content-label-content" style="width:90%;float:left;margin:8px 18px 0px 16px;">
+          I am a passionate website and mobile programmer. I am currently recruiting young students to take part in some open source projects.
+        </label>
+      </div>
+
+    </div>
+    <div class="custom-card shadow-1" style="width:100%;min-height:120px;margin-bottom:10px;">
+      <div class="custom-card-title primary-color" style="margin-bottom:8px;">
+        Reviews:
+      </div>
+      <div ng-repeat="review in selectedJobToView.reviews" class="basicdiv" style="width:100%;float:left;margin-bottom:6px;">
+        <div class="basicdiv" style="width:20%;float:left;">
+          <img style="width:70%;border-radius:50%;margin:0px 15% 0px 15%;" src="{{review.ava}}" />
+        </div>
+        <div class="basicdiv" style="width:80%;float:left;">
+          <label class="custom-card-content-label-content primary-color" style="width:100%;float:left;font-weight:bold;">
+            {{review.from}}
+          </label>
+
+          <label class="custom-card-content-label-content" style="width:100%;float:left">
+            {{review.content}}
+          </label>
+          <div class="basicdiv" style="width:100%;float:left;font-size:13px;">
+            Rating:
+            <i ng-repeat="n in rangeRating(review.ratings)" class="ion ion-android-star primary-color" style="font-size:16px;margin-top:4px;"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="custom-card-title primary-color" style="margin-bottom:8px;border:0px;">
+      Discussion:
+    </div>
+    <div ng-repeat="applicant in selectedJobToView.applicants" class="basicdiv" style="width:100%;float:left;margin-bottom:6px;">
+      <div class="basicdiv" style="width:20%;float:left;">
+        <img style="width:70%;border-radius:50%;margin:0px 15% 0px 15%;border:2px solid white;" src="{{applicant.ava}}" />
+      </div>
+      <div class="basicdiv" style="width:80%;float:left;">
+        <label class="custom-card-content-label-content primary-color" style="width:100%;float:left;font-weight:bold;">
+          {{applicant.from}}
+        </label>
+
+        <label class="custom-card-content-label-content" style="width:100%;float:left">
+          {{applicant.content}}
+        </label>
+        <div class="basicdiv" style="width:100%;float:left;font-size:13px;">
+          Rating:
+          <i ng-repeat="n in rangeRating(applicant.ratings)" class="ion ion-android-star primary-color" style="font-size:16px;margin-top:4px;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
